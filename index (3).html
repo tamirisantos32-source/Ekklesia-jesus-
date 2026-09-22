@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071426">
+<meta name="description" content="Ekklesia - A comunidade reunida">
+<title>Ekklesia</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#05080d;
+  color:#fff;
+  min-height:100vh;
+  padding-bottom:80px;
+}
+
+header{
+  background:linear-gradient(145deg,#071426,#0d2340);
+  text-align:center;
+  padding:25px 15px 20px;
+  border-bottom:1px solid #b99645;
+}
+
+header .marca{
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:3px;
+  color:#d4af57;
+}
+
+header .subtitulo{
+  margin-top:5px;
+  font-size:14px;
+  color:#ddd;
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:18px;
+}
+
+.pagina{
+  display:none;
+}
+
+.pagina.ativa{
+  display:block;
+}
+
+.logo{
+  text-align:center;
+  padding:25px 0;
+}
+
+.logo .simbolo{
+  font-size:60px;
+  margin-bottom:10px;
+}
+
+.logo h1{
+  font-size:42px;
+  color:#d4af57;
+  letter-spacing:2px;
+}
+
+.logo p{
+  color:#ddd;
+  margin-top:5px;
+}
+
+.card{
+  background:linear-gradient(145deg,#0b111b,#101a28);
+  border:1px solid #253448;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+.card h2,
+.card h3{
+  color:#d4af57;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#d7d7d7;
+  line-height:1.5;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:15px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  background:#070c13;
+  color:#fff;
+  border:1px solid #34455a;
+  border-radius:10px;
+  padding:13px;
+  margin:6px 0;
+  font-size:15px;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+button{
+  cursor:pointer;
+}
+
+.botao{
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  background:#d4af57;
+  color:#05080d;
+  font-weight:bold;
+  margin:5px 3px 5px 0;
+}
+
+.botao.azul{
+  background:#17385f;
+  color:#fff;
+}
+
+.botao.vermelho{
+  background:#7b2631;
+  color:#fff;
+}
+
+.botao.verde{
+  background:#246044;
+  color:#fff;
+}
+
+.item{
+  background:#080e17;
+  border:1px solid #29394d;
+  border-radius:12px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.item strong{
+  color:#d4af57;
+}
+
+.item small{
+  display:block;
+  color:#aaa;
+  margin-top:5px;
+}
+
+.reacoes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+
+.reacao{
+  background:#111c2b;
+  color:#fff;
+  border:1px solid #33465d;
+  border-radius:20px;
+  padding:7px 11px;
+}
+
+.reacao.ativa{
+  border-color:#d4af57;
+  background:#253653;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:15px;
+  font-size:12px;
+  margin-top:7px;
+}
+
+.pendente{
+  background:#765c19;
+}
+
+.aprovado{
+  background:#205b40;
+}
+
+.recusado{
+  background:#6d2730;
+}
+
+.mensagem{
+  margin-top:8px;
+  color:#d4af57;
+}
+
+.vazio{
+  color:#999;
+  padding:10px 0;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:100;
+  display:flex;
+  justify-content:center;
+  background:#070b12;
+  border-top:1px solid #29394d;
+}
+
+nav button{
+  flex:1;
+  max-width:180px;
+  border:0;
+  background:transparent;
+  color:#aaa;
+  padding:10px 4px;
+  font-size:12px;
+}
+
+nav button span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+nav button.ativo{
+  color:#d4af57;
+}
+
+.admin-login{
+  max-width:500px;
+  margin:20px auto;
+}
+
+.oculto{
+  display:none!important;
+}
+
+.separador{
+  height:1px;
+  background:#26364a;
+  margin:20px 0;
+}
+
+@media(max-width:600px){
+  .logo h1{
+    font-size:36px;
+  }
+
+  header .marca{
+    font-size:27px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .card{
+    padding:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="marca">EKKLESIA</div>
+  <div class="subtitulo">A comunidade reunida</div>
+</header>
+
+<main class="container">
+
+<!-- INÍCIO -->
+<section id="inicio" class="pagina ativa">
+
+  <div class="logo">
+    <div class="simbolo">📖</div>
+    <h1>Ekklesia</h1>
+    <p>A comunidade reunida</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Próximo culto</h3>
+      <div id="proximoCulto"></div>
+    </div>
+
+    <div class="card">
+      <h3>Próximo compromisso</h3>
+      <div id="proximoCompromisso"></div>
+    </div>
+
+    <div class="card">
+      <h3>Último aviso</h3>
+      <div id="ultimoAviso"></div>
+    </div>
+
+    <div class="card">
+      <h3>Aniversariantes</h3>
+      <div id="inicioAniversarios"></div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- AGENDA -->
+<section id="agenda" class="pagina">
+
+  <div class="card">
+    <h2>🗓️ Agenda</h2>
+    <div id="listaAgenda"></div>
+  </div>
+
+</section>
+
+
+<!-- AVISOS -->
+<section id="avisos" class="pagina">
+
+  <div class="card">
+    <h2>📢 Avisos</h2>
+    <div id="listaAvisos"></div>
+  </div>
+
+  <div class="card">
+    <h2>🎂 Aniversariantes</h2>
+    <div id="listaAniversarios"></div>
+  </div>
+
+</section>
+
+
+<!-- COMUNIDADE -->
+<section id="comunidade" class="pagina">
+
+  <div class="card">
+
+    <h2>👥 Comunidade</h2>
+
+    <h3>Solicitar entrada</h3>
+
+    <p>
+      Preencha seus dados para solicitar sua entrada na comunidade.
+      O administrador analisará a solicitação.
+    </p>
+
+    <form id="formMembro">
+
+      <input
+        id="membroNome"
+        placeholder="Nome"
+        required
+      >
+
+      <input
+        id="membroTelefone"
+        placeholder="Telefone"
+      >
+
+      <input
+        id="membroEmail"
+        type="email"
+        placeholder="E-mail"
+        required
+      >
+
+      <button class="botao" type="submit">
+        Solicitar entrada
+      </button>
+
+    </form>
+
+    <div id="statusMembro" class="mensagem"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>😊 Acesso do membro</h3>
+
+    <p>
+      Se sua solicitação já foi aprovada, informe o mesmo
+      e-mail utilizado no cadastro.
+    </p>
+
+    <input
+      id="membroAcessoEmail"
+      type="email"
+      placeholder="E-mail cadastrado"
+    >
+
+    <button
+      class="botao azul"
+      onclick="entrarMembro()"
+    >
+      Entrar como membro
+    </button>
+
+    <button
+      class="botao vermelho"
+      onclick="sairMembro()"
+    >
+      Sair
+    </button>
+
+    <div id="erroMembro" class="mensagem"></div>
+    <div id="membroLogado" class="mensagem"></div>
+
+  </div>
+
+
+  <div id="conteudoMembro"></div>
+
+
+  <div class="card">
+
+    <h3>🙏 Pedido de oração</h3>
+
+    <form id="formOracao">
+
+      <input
+        id="oracaoNome"
+        placeholder="Nome (opcional)"
+      >
+
+      <textarea
+        id="oracaoTexto"
+        placeholder="Escreva seu pedido de oração"
+        required
+      ></textarea>
+
+      <button class="botao" type="submit">
+        Enviar pedido
+      </button>
+
+    </form>
+
+    <div id="mensagemOracao" class="mensagem"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>💰 Dízimos e ofertas</h3>
+
+    <p>
+      Registre seu dízimo ou oferta.
+    </p>
+
+    <form id="formOferta">
+
+      <select id="ofertaTipo">
+        <option value="Dízimo">Dízimo</option>
+        <option value="Oferta">Oferta</option>
+      </select>
+
+      <input
+        id="ofertaValor"
+        type="number"
+        step="0.01"
+        min="0"
+        placeholder="Valor"
+        required
+      >
+
+      <button class="botao" type="submit">
+        Registrar
+      </button>
+
+    </form>
+
+    <div id="mensagemOferta" class="mensagem"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ADMIN -->
+<section id="admin" class="pagina">
+
+  <div id="loginAdmin" class="card admin-login">
+
+    <h2>⚙️ Área administrativa</h2>
+
+    <p>
+      Primeiro acesso: crie o acesso da administração neste aparelho.
+    </p>
+
+    <input
+      id="adminEmail"
+      type="email"
+      placeholder="E-mail"
+    >
+
+    <input
+      id="adminSenha"
+      type="password"
+      placeholder="Senha"
+    >
+
+    <button
+      class="botao"
+      onclick="entrarAdmin()"
+    >
+      Entrar
+    </button>
+
+    <div id="erroAdmin" class="mensagem"></div>
+
+  </div>
+
+
+  <div id="painelAdmin" class="oculto">
+
+    <div class="card">
+
+      <h2>⚙️ Painel administrativo</h2>
+
+      <p>
+        Você está na área de administração.
+      </p>
+
+      <button
+        class="botao vermelho"
+        onclick="sairAdmin()"
+      >
+        Sair
+      </button>
+
+    </div>
+
+
+    <!-- COMPROMISSOS -->
+    <div class="card">
+
+      <h3>🗓️ Cadastrar compromisso</h3>
+
+      <input id="eventoId" type="hidden">
+
+      <select id="eventoTipo">
+        <option value="Culto">Culto</option>
+        <option value="Ensaio">Ensaio</option>
+        <option value="Reunião">Reunião</option>
+        <option value="Grupo de oração">Grupo de oração</option>
+        <option value="Evento">Evento</option>
+        <option value="Convite em outra igreja">
+          Convite em outra igreja
+        </option>
+      </select>
+
+      <input
+        id="eventoTitulo"
+        placeholder="Título"
+      >
+
+      <input
+        id="eventoData"
+        type="datetime-local"
+      >
+
+      <input
+        id="eventoLocal"
+        placeholder="Local"
+      >
+
+      <button
+        class="botao"
+        onclick="salvarEvento()"
+      >
+        Salvar
+      </button>
+
+      <button
+        class="botao azul"
+        onclick="cancelarEdicaoEvento()"
+      >
+        Cancelar edição
+      </button>
+
+    </div>
+
+
+    <!-- AVISO -->
+    <div class="card">
+
+      <h3>📢 Cadastrar aviso</h3>
+
+      <input id="avisoId" type="hidden">
+
+      <input
+        id="novoAvisoTitulo"
+        placeholder="Título"
+      >
+
+      <textarea
+        id="novoAvisoTexto"
+        placeholder="Conteúdo do aviso"
+      ></textarea>
+
+      <button
+        class="botao"
+        onclick="salvarAviso()"
+      >
+        Publicar
+      </button>
+
+      <button
+        class="botao azul"
+        onclick="cancelarEdicaoAviso()"
+      >
+        Cancelar edição
+      </button>
+
+    </div>
+
+
+    <!-- ANIVERSARIANTE -->
+    <div class="card">
+
+      <h3>🎂 Cadastrar aniversariante</h3>
+
+      <input id="aniversarioId" type="hidden">
+
+      <input
+        id="novoAniversarioNome"
+        placeholder="Nome"
+      >
+
+      <input
+        id="novoAniversarioData"
+        type="date"
+      >
+
+      <button
+        class="botao"
+        onclick="salvarAniversario()"
+      >
+        Salvar
+      </button>
+
+      <button
+        class="botao azul"
+        onclick="cancelarEdicaoAniversario()"
+      >
+        Cancelar edição
+      </button>
+
+    </div>
+
+
+    <!-- ADMINISTRADORES -->
+    <div class="card">
+
+      <h3>👑 Administradores</h3>
+
+      <input
+        id="novoAdminEmail"
+        type="email"
+        placeholder="E-mail do administrador"
+      >
+
+      <input
+        id="novoAdminSenha"
+        type="password"
+        placeholder="Senha"
+      >
+
+      <button
+        class="botao"
+        onclick="adicionarAdmin()"
+      >
+        Adicionar administrador
+      </button>
+
+      <div id="listaAdmins"></div>
+
+    </div>
+
+
+    <!-- SOLICITAÇÕES E MEMBROS -->
+    <div class="card">
+
+      <h3>👥 Solicitações de entrada</h3>
+
+      <div id="listaSolicitacoes"></div>
+
+      <div class="separador"></div>
+
+      <h3>Membros aprovados</h3>
+
+      <div id="listaMembros"></div>
+
+    </div>
+
+
+    <!-- ORAÇÕES -->
+    <div class="card">
+
+      <h3>🙏 Pedidos de oração</h3>
+
+      <div id="listaOracoes"></div>
+
+    </div>
+
+
+    <!-- OFERTAS -->
+    <div class="card">
+
+      <h3>💰 Registros de dízimos e ofertas</h3>
+
+      <div id="listaOfertas"></div>
+
+    </div>
+
+
+    <!-- CONTEÚDO -->
+    <div class="card">
+
+      <h3>📝 Gerenciar conteúdo</h3>
+
+      <div id="gerenciarConteudo"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- MENU -->
+<nav>
+
+  <button
+    class="ativo"
+    onclick="abrirPagina('inicio',this)"
+  >
+    <span>⌂</span>
+    Início
+  </button>
+
+  <button
+    onclick="abrirPagina('agenda',this)"
+  >
+    <span>🗓️</span>
+    Agenda
+  </button>
+
+  <button
+    onclick="abrirPagina('avisos',this)"
+  >
+    <span>📢</span>
+    Avisos
+  </button>
+
+  <button
+    onclick="abrirPagina('comunidade',this)"
+  >
+    <span>👥</span>
+    Comunidade
+  </button>
+
+  <button
+    onclick="abrirPagina('admin',this)"
+  >
+    <span>⚙️</span>
+    Admin
+  </button>
+
+</nav>
+
+
+<script>
+
+/* =========================
+   BANCO LOCAL
+========================= */
+
+let dados =
+JSON.parse(localStorage.getItem("EKKLESIA_V3"))
+||
+{
+  eventos:[],
+  avisos:[],
+  aniversarios:[],
+  oracoes:[],
+  ofertas:[],
+  membros:[],
+  admins:[],
+  reacoes:{}
+};
+
+
+/* Compatibilidade com versões anteriores */
+
+dados.eventos = dados.eventos || [];
+dados.avisos = dados.avisos || [];
+dados.aniversarios = dados.aniversarios || [];
+dados.oracoes = dados.oracoes || [];
+dados.ofertas = dados.ofertas || [];
+dados.membros = dados.membros || [];
+dados.admins = dados.admins || [];
+dados.reacoes = dados.reacoes || {};
+
+
+function salvar(){
+
+  localStorage.setItem(
+    "EKKLESIA_V3",
+    JSON.stringify(dados)
+  );
+
+  atualizarTudo();
+}
+
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function abrirPagina(id,botao){
+
+  document.querySelectorAll(".pagina")
+    .forEach(p=>p.classList.remove("ativa"));
+
+  document.getElementById(id)
+    .classList.add("ativa");
+
+  document.querySelectorAll("nav button")
+    .forEach(b=>b.classList.remove("ativo"));
+
+  if(botao){
+    botao.classList.add("ativo");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function entrarAdmin(){
+
+  let email =
+    document.getElementById("adminEmail")
+      .value.trim().toLowerCase();
+
+  let senha =
+    document.getElementById("adminSenha")
+      .value;
+
+  if(!email || !senha){
+
+    document.getElementById("erroAdmin")
+      .textContent =
+      "Informe e-mail e senha.";
+
+    return;
+  }
+
+
+  /* Primeiro administrador */
+
+  if(dados.admins.length===0){
+
+    dados.admins.push({
+      email:email,
+      senha:senha
+    });
+
+    salvar();
+
+    sessionStorage.setItem(
+      "EKKLESIA_ADMIN",
+      email
+    );
+
+    mostrarPainelAdmin();
+
+    return;
+  }
+
+
+  let admin =
+    dados.admins.find(
+      a =>
+      a.email===email &&
+      a.senha===senha
+    );
+
+
+  if(!admin){
+
+    document.getElementById("erroAdmin")
+      .textContent =
+      "E-mail ou senha incorretos.";
+
+    return;
+  }
+
+
+  sessionStorage.setItem(
+    "EKKLESIA_ADMIN",
+    email
+  );
+
+  mostrarPainelAdmin();
+}
+
+
+function mostrarPainelAdmin(){
+
+  document.getElementById("loginAdmin")
+    .classList.add("oculto");
+
+  document.getElementById("painelAdmin")
+    .classList.remove("oculto");
+
+  atualizarAdmin();
+}
+
+
+function sairAdmin(){
+
+  sessionStorage.removeItem(
+    "EKKLESIA_ADMIN"
+  );
+
+  document.getElementById("loginAdmin")
+    .classList.remove("oculto");
+
+  document.getElementById("painelAdmin")
+    .classList.add("oculto");
+}
+
+
+/* =========================
+   EVENTOS
+========================= */
+
+function salvarEvento(){
+
+  let id =
+    document.getElementById("eventoId").value;
+
+  let tipo =
+    document.getElementById("eventoTipo").value;
+
+  let titulo =
+    document.getElementById("eventoTitulo").value.trim();
+
+  let data =
+    document.getElementById("eventoData").value;
+
+  let local =
+    document.getElementById("eventoLocal").value.trim();
+
+
+  if(!titulo || !data){
+
+    alert("Preencha o título e a data.");
+
+    return;
+  }
+
+
+  if(id){
+
+    let evento =
+      dados.eventos.find(e=>e.id==id);
+
+    if(evento){
+
+      evento.tipo=tipo;
+      evento.titulo=titulo;
+      evento.data=data;
+      evento.local=local;
+    }
+
+  }else{
+
+    dados.eventos.push({
+
+      id:Date.now(),
+      tipo:tipo,
+      titulo:titulo,
+      data:data,
+      local:local
+
+    });
+
+  }
+
+
+  cancelarEdicaoEvento();
+
+  salvar();
+}
+
+
+function editarEvento(id){
+
+  let e =
+    dados.eventos.find(x=>x.id==id);
+
+  if(!e)return;
+
+
+  document.getElementById("eventoId")
+    .value=e.id;
+
+  document.getElementById("eventoTipo")
+    .value=e.tipo;
+
+  document.getElementById("eventoTitulo")
+    .value=e.titulo;
+
+  document.getElementById("eventoData")
+    .value=e.data;
+
+  document.getElementById("eventoLocal")
+    .value=e.local;
+
+
+  abrirPagina(
+    "admin",
+    document.querySelectorAll("nav button")[4]
+  );
+
+  window.scrollTo({
+    top:document.getElementById("eventoId")
+      .getBoundingClientRect().top +
+      window.scrollY - 100
+  });
+}
+
+
+function copiarEvento(id){
+
+  let e =
+    dados.eventos.find(x=>x.id==id);
+
+  if(!e)return;
+
+  dados.eventos.push({
+
+    ...e,
+
+    id:Date.now(),
+
+    titulo:e.titulo+" - cópia"
+
+  });
+
+  salvar();
+}
+
+
+function excluirEvento(id){
+
+  if(!confirm("Excluir este compromisso?"))
+    return;
+
+  dados.eventos =
+    dados.eventos.filter(
+      e=>e.id!=id
+    );
+
+  salvar();
+}
+
+
+function cancelarEdicaoEvento(){
+
+  document.getElementById("eventoId").value="";
+  document.getElementById("eventoTitulo").value="";
+  document.getElementById("eventoData").value="";
+  document.getElementById("eventoLocal").value="";
+
+}
+
+
+/* =========================
+   AVISOS
+========================= */
+
+function salvarAviso(){
+
+  let id =
+    document.getElementById("avisoId").value;
+
+  let titulo =
+    document.getElementById("novoAvisoTitulo")
+      .value.trim();
+
+  let texto =
+    document.getElementById("novoAvisoTexto")
+      .value.trim();
+
+
+  if(!titulo){
+
+    alert("Informe o título.");
+
+    return;
+  }
+
+
+  if(id){
+
+    let aviso =
+      dados.avisos.find(a=>a.id==id);
+
+    if(aviso){
+
+      aviso.titulo=titulo;
+      aviso.texto=texto;
+    }
+
+  }else{
+
+    dados.avisos.push({
+
+      id:Date.now(),
+      titulo:titulo,
+      texto:texto,
+      data:new Date().toISOString()
+
+    });
+
+  }
+
+
+  cancelarEdicaoAviso();
+
+  salvar();
+}
+
+
+function editarAviso(id){
+
+  let a =
+    dados.avisos.find(x=>x.id==id);
+
+  if(!a)return;
+
+  document.getElementById("avisoId")
+    .value=a.id;
+
+  document.getElementById("novoAvisoTitulo")
+    .value=a.titulo;
+
+  document.getElementById("novoAvisoTexto")
+    .value=a.texto || "";
+
+
+  abrirPagina(
+    "admin",
+    document.querySelectorAll("nav button")[4]
+  );
+}
+
+
+function copiarAviso(id){
+
+  let a =
+    dados.avisos.find(x=>x.id==id);
+
+  if(!a)return;
+
+  dados.avisos.push({
+
+    id:Date.now(),
+
+    titulo:a.titulo+" - cópia",
+
+    texto:a.texto,
+
+    data:new Date().toISOString()
+
+  });
+
+  salvar();
+}
+
+
+function excluirAviso(id){
+
+  if(!confirm("Excluir este aviso?"))
+    return;
+
+  dados.avisos =
+    dados.avisos.filter(
+      a=>a.id!=id
+    );
+
+  salvar();
+}
+
+
+function cancelarEdicaoAviso(){
+
+  document.getElementById("avisoId").value="";
+  document.getElementById("novoAvisoTitulo").value="";
+  document.getElementById("novoAvisoTexto").value="";
+
+}
+
+
+/* =========================
+   ANIVERSÁRIOS
+========================= */
+
+function salvarAniversario(){
+
+  let id =
+    document.getElementById("aniversarioId").value;
+
+  let nome =
+    document.getElementById("novoAniversarioNome")
+      .value.trim();
+
+  let data =
+    document.getElementById("novoAniversarioData")
+      .value;
+
+
+  if(!nome || !data){
+
+    alert("Preencha nome e data.");
+
+    return;
+  }
+
+
+  if(id){
+
+    let a =
+      dados.aniversarios.find(x=>x.id==id);
+
+    if(a){
+
+      a.nome=nome;
+      a.data=data;
+
+    }
+
+  }else{
+
+    dados.aniversarios.push({
+
+      id:Date.now(),
+      nome:nome,
+      data:data
+
+    });
+
+  }
+
+
+  cancelarEdicaoAniversario();
+
+  salvar();
+}
+
+
+function editarAniversario(id){
+
+  let a =
+    dados.aniversarios.find(x=>x.id==id);
+
+  if(!a)return;
+
+  document.getElementById("aniversarioId")
+    .value=a.id;
+
+  document.getElementById("novoAniversarioNome")
+    .value=a.nome;
+
+  document.getElementById("novoAniversarioData")
+    .value=a.data;
+
+  abrirPagina(
+    "admin",
+    document.querySelectorAll("nav button")[4]
+  );
+}
+
+
+function copiarAniversario(id){
+
+  let a =
+    dados.aniversarios.find(x=>x.id==id);
+
+  if(!a)return;
+
+  dados.aniversarios.push({
+
+    id:Date.now(),
+
+    nome:a.nome+" - cópia",
+
+    data:a.data
+
+  });
+
+  salvar();
+}
+
+
+function excluirAniversario(id){
+
+  if(!confirm("Excluir este aniversariante?"))
+    return;
+
+  dados.aniversarios =
+    dados.aniversarios.filter(
+      a=>a.id!=id
+    );
+
+  salvar();
+}
+
+
+function cancelarEdicaoAniversario(){
+
+  document.getElementById("aniversarioId").value="";
+  document.getElementById("novoAniversarioNome").value="";
+  document.getElementById("novoAniversarioData").value="";
+
+}
+
+
+/* =========================
+   SOLICITAÇÃO DE MEMBRO
+========================= */
+
+document.getElementById("formMembro")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  let nome =
+    document.getElementById("membroNome")
+      .value.trim();
+
+  let telefone =
+    document.getElementById("membroTelefone")
+      .value.trim();
+
+  let email =
+    document.getElementById("membroEmail")
+      .value.trim()
+      .toLowerCase();
+
+
+  let existente =
+    dados.membros.find(
+      m=>m.email===email &&
+      (m.status==="pendente" ||
+       m.status==="aprovado")
+    );
+
+
+  if(existente){
+
+    document.getElementById("statusMembro")
+      .textContent =
+      "Este e-mail já possui uma solicitação ou cadastro.";
+
+    return;
+  }
+
+
+  dados.membros.push({
+
+    id:Date.now(),
+
+    nome:nome,
+
+    telefone:telefone,
+
+    email:email,
+
+    status:"pendente",
+
+    data:new Date().toISOString()
+
+  });
+
+
+  salvar();
+
+  document.getElementById("formMembro")
+    .reset();
+
+  document.getElementById("statusMembro")
+    .textContent =
+    "Solicitação enviada. Aguarde a aprovação do administrador.";
+
+});
+
+
+/* =========================
+   ADMINISTRADORES
+========================= */
+
+function adicionarAdmin(){
+
+  if(!sessionStorage.getItem("EKKLESIA_ADMIN")){
+
+    alert("Entre como administrador.");
+
+    return;
+  }
+
+
+  let email =
+    document.getElementById("novoAdminEmail")
+      .value.trim()
+      .toLowerCase();
+
+  let senha =
+    document.getElementById("novoAdminSenha")
+      .value;
+
+
+  if(!email || !senha){
+
+    alert("Informe e-mail e senha.");
+
+    return;
+  }
+
+
+  if(dados.admins.some(a=>a.email===email)){
+
+    alert("Este administrador já existe.");
+
+    return;
+  }
+
+
+  dados.admins.push({
+
+    email:email,
+    senha:senha
+
+  });
+
+
+  document.getElementById("novoAdminEmail")
+    .value="";
+
+  document.getElementById("novoAdminSenha")
+    .value="";
+
+  salvar();
+}
+
+
+function excluirAdmin(index){
+
+  if(dados.admins.length<=1){
+
+    alert("É necessário manter pelo menos um administrador.");
+
+    return;
+  }
+
+
+  if(!confirm("Excluir este administrador?"))
+    return;
+
+  dados.admins.splice(index,1);
+
+  salvar();
+}
+
+
+/* =========================
+   MEMBROS
+========================= */
+
+function aprovarMembro(id){
+
+  let m =
+    dados.membros.find(x=>x.id==id);
+
+  if(!m)return;
+
+  m.status="aprovado";
+
+  salvar();
+
+  alert("Membro aprovado.");
+}
+
+
+function recusarMembro(id){
+
+  let m =
+    dados.membros.find(x=>x.id==id);
+
+  if(!m)return;
+
+  if(!confirm("Recusar esta solicitação?"))
+    return;
+
+  m.status="recusado";
+
+  salvar();
+}
+
+
+function excluirMembro(id){
+
+  if(!confirm("Excluir este membro?"))
+    return;
+
+  dados.membros =
+    dados.membros.filter(
+      m=>m.id!=id
+    );
+
+  salvar();
+}
+
+
+/* =========================
+   ENTRADA DO MEMBRO
+========================= */
+
+function entrarMembro(){
+
+  let email =
+    document.getElementById("membroAcessoEmail")
+      .value.trim()
+      .toLowerCase();
+
+
+  let membro =
+    dados.membros.find(
+      m=>
+      m.email===email &&
+      m.status==="aprovado"
+    );
+
+
+  if(!membro){
+
+    document.getElementById("erroMembro")
+      .textContent =
+      "Membro não encontrado ou ainda não aprovado.";
+
+    return;
+  }
+
+
+  sessionStorage.setItem(
+    "EKKLESIA_MEMBRO",
+    email
+  );
+
+
+  document.getElementById("erroMembro")
+    .textContent="";
+
+  atualizarConteudoMembro();
+}
+
+
+function sairMembro(){
+
+  sessionStorage.removeItem(
+    "EKKLESIA_MEMBRO"
+  );
+
+  atualizarConteudoMembro();
+}
+
+
+/* =========================
+   REAÇÕES
+========================= */
+
+function reagir(tipo,id,emoji){
+
+  let email =
+    sessionStorage.getItem(
+      "EKKLESIA_MEMBRO"
+    );
+
+
+  if(!email){
+
+    alert(
+      "Entre como membro aprovado para reagir."
+    );
+
+    return;
+  }
+
+
+  let chave =
+    tipo+"_"+id;
+
+
+  if(!dados.reacoes[chave])
+    dados.reacoes[chave]={};
+
+
+  if(!dados.reacoes[chave][emoji])
+    dados.reacoes[chave][emoji]=[];
+
+
+  let lista =
+    dados.reacoes[chave][emoji];
+
+
+  let pos =
+    lista.indexOf(email);
+
+
+  if(pos>=0){
+
+    lista.splice(pos,1);
+
+  }else{
+
+    lista.push(email);
+
+  }
+
+
+  salvar();
+}
+
+
+function contouReacao(tipo,id,emoji){
+
+  let chave =
+    tipo+"_"+id;
+
+  let r =
+    dados.reacoes[chave] || {};
+
+  return (r[emoji] || []).length;
+}
+
+
+function botoesReacao(tipo,id){
+
+  let emojis=[
+    "🙏",
+    "❤️",
+    "👍",
+    "👏",
+    "😊"
+  ];
+
+
+  let email =
+    sessionStorage.getItem(
+      "EKKLESIA_MEMBRO"
+    );
+
+
+  let chave =
+    tipo+"_"+id;
+
+  let r =
+    dados.reacoes[chave] || {};
+
+
+  return `
+    <div class="reacoes">
+      ${
+        emojis.map(emoji=>{
+
+          let ativa =
+            email &&
+            r[emoji] &&
+            r[emoji].includes(email);
+
+          return `
+            <button
+              class="reacao ${ativa ? "ativa":""}"
+              onclick="reagir('${tipo}',${id},'${emoji}')"
+            >
+              ${emoji}
+              <span>
+                ${contouReacao(tipo,id,emoji)}
+              </span>
+            </button>
+          `;
+
+        }).join("")
+      }
+    </div>
+  `;
+}
+
+
+/* =========================
+   CONTEÚDO DO MEMBRO
+========================= */
+
+function atualizarConteudoMembro(){
+
+  let area =
+    document.getElementById(
+      "conteudoMembro"
+    );
+
+  let email =
+    sessionStorage.getItem(
+      "EKKLESIA_MEMBRO"
+    );
+
+
+  if(!email){
+
+    document.getElementById("membroLogado")
+      .textContent =
+      "";
+
+    area.innerHTML="";
+
+    return;
+  }
+
+
+  let membro =
+    dados.membros.find(
+      m=>m.email===email
+    );
+
+
+  if(!membro){
+
+    sessionStorage.removeItem(
+      "EKKLESIA_MEMBRO"
+    );
+
+    area.innerHTML="";
+
+    return;
+  }
+
+
+  document.getElementById("membroLogado")
+    .textContent =
+    "Você está conectado como membro: "+
+    membro.nome;
+
+
+  let html=`
+
+    <div class="card">
+
+      <h2>👥 Comunidade</h2>
+
+      <p>
+        Conteúdos da igreja.
+        Você pode reagir usando emojis.
+      </p>
+
+    </div>
+
+  `;
+
+
+  if(dados.avisos.length){
+
+    html+=`
+
+      <div class="card">
+
+        <h3>📢 Avisos</h3>
+
+        ${
+          dados.avisos.slice().reverse().map(a=>`
+
+            <div class="item">
+
+              <strong>${escapar(a.titulo)}</strong>
+
+              <p>
+                ${escapar(a.texto || "")}
+              </p>
+
+              ${botoesReacao("aviso",a.id)}
+
+            </div>
+
+          `).join("")
+        }
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(dados.eventos.length){
+
+    html+=`
+
+      <div class="card">
+
+        <h3>🗓️ Próximos compromissos</h3>
+
+        ${
+          dados.eventos
+          .slice()
+          .sort((a,b)=>
+            new Date(a.data)-new Date(b.data)
+          )
+          .map(e=>`
+
+            <div class="item">
+
+              <strong>
+                ${escapar(e.titulo)}
+              </strong>
+
+              <small>
+                ${escapar(e.tipo)}
+              </small>
+
+              <small>
+                ${formatarData(e.data)}
+              </small>
+
+              <small>
+                ${escapar(e.local || "")}
+              </small>
+
+              ${botoesReacao("evento",e.id)}
+
+            </div>
+
+          `).join("")
+        }
+
+      </div>
+
+    `;
+
+  }
+
+
+  area.innerHTML=html;
+}
+
+
+/* =========================
+   ORAÇÃO
+========================= */
+
+document.getElementById("formOracao")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+
+  let nome =
+    document.getElementById("oracaoNome")
+      .value.trim();
+
+  let texto =
+    document.getElementById("oracaoTexto")
+      .value.trim();
+
+
+  if(!texto)return;
+
+
+  dados.oracoes.push({
+
+    id:Date.now(),
+
+    nome:nome || "Anônimo",
+
+    texto:texto,
+
+    data:new Date().toISOString()
+
+  });
+
+
+  document.getElementById("formOracao")
+    .reset();
+
+
+  document.getElementById("mensagemOracao")
+    .textContent =
+    "Pedido de oração enviado.";
+
+
+  salvar();
+
+});
+
+
+/* =========================
+   OFERTAS
+========================= */
+
+document.getElementById("formOferta")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+
+  let tipo =
+    document.getElementById("ofertaTipo")
+      .value;
+
+  let valor =
+    parseFloat(
+      document.getElementById("ofertaValor")
+        .value
+    );
+
+
+  if(!valor || valor<=0){
+
+    alert("Informe um valor válido.");
+
+    return;
+  }
+
+
+  dados.ofertas.push({
+
+    id:Date.now(),
+
+    tipo:tipo,
+
+    valor:valor,
+
+    data:new Date().toISOString()
+
+  });
+
+
+  document.getElementById("formOferta")
+    .reset();
+
+
+  document.getElementById("mensagemOferta")
+    .textContent =
+    "Registro realizado.";
+
+
+  salvar();
+
+});
+
+
+/* =========================
+   TELAS PÚBLICAS
+========================= */
+
+function formatarData(data){
+
+  if(!data)return "";
+
+  return new Date(data)
+    .toLocaleString(
+      "pt-BR",
+      {
+        dateStyle:"short",
+        timeStyle:"short"
+      }
+    );
+}
+
+
+function atualizarAgenda(){
+
+  let el =
+    document.getElementById(
+      "listaAgenda"
+    );
+
+
+  if(!dados.eventos.length){
+
+    el.innerHTML=
+      '<div class="vazio">Nenhum compromisso cadastrado.</div>';
+
+    return;
+  }
+
+
+  el.innerHTML =
+    dados.eventos
+    .slice()
+    .sort((a,b)=>
+      new Date(a.data)-new Date(b.data)
+    )
+    .map(e=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(e.titulo)}
+        </strong>
+
+        <small>
+          ${escapar(e.tipo)}
+        </small>
+
+        <small>
+          ${formatarData(e.data)}
+        </small>
+
+        <small>
+          ${escapar(e.local || "")}
+        </small>
+
+      </div>
+
+    `).join("");
+}
+
+
+function atualizarAvisos(){
+
+  let el =
+    document.getElementById(
+      "listaAvisos"
+    );
+
+
+  if(!dados.avisos.length){
+
+    el.innerHTML=
+      '<div class="vazio">Nenhum aviso.</div>';
+
+    return;
+  }
+
+
+  el.innerHTML =
+    dados.avisos
+    .slice()
+    .reverse()
+    .map(a=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(a.titulo)}
+        </strong>
+
+        <p>
+          ${escapar(a.texto || "")}
+        </p>
+
+      </div>
+
+    `).join("");
+}
+
+
+function atualizarAniversarios(){
+
+  let html;
+
+
+  if(!dados.aniversarios.length){
+
+    html=
+      '<div class="vazio">Nenhum cadastrado.</div>';
+
+  }else{
+
+    html =
+      dados.aniversarios
+      .slice()
+      .sort((a,b)=>
+        new Date(a.data)-new Date(b.data)
+      )
+      .map(a=>`
+
+        <div class="item">
+
+          <strong>
+            🎂 ${escapar(a.nome)}
+          </strong>
+
+          <small>
+            ${formatarDataSimples(a.data)}
+          </small>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  document.getElementById(
+    "listaAniversarios"
+  ).innerHTML=html;
+
+
+  document.getElementById(
+    "inicioAniversarios"
+  ).innerHTML=html;
+}
+
+
+function formatarDataSimples(data){
+
+  if(!data)return "";
+
+  return new Date(data+"T12:00:00")
+    .toLocaleDateString(
+      "pt-BR"
+    );
+}
+
+
+/* =========================
+   INÍCIO
+========================= */
+
+function atualizarInicio(){
+
+  let cultos =
+    dados.eventos
+    .filter(e=>e.tipo==="Culto")
+    .filter(e=>
+      new Date(e.data)>=new Date()
+    )
+    .sort((a,b)=>
+      new Date(a.data)-new Date(b.data)
+    );
+
+
+  document.getElementById(
+    "proximoCulto"
+  ).innerHTML =
+    cultos.length
+    ?
+    `
+      <strong>
+        ${escapar(cultos[0].titulo)}
+      </strong>
+
+      <small>
+        ${formatarData(cultos[0].data)}
+      </small>
+
+      <small>
+        ${escapar(cultos[0].local || "")}
+      </small>
+    `
+    :
+    '<div class="vazio">Nenhum culto cadastrado.</div>';
+
+
+  let compromissos =
+    dados.eventos
+    .filter(e=>
+      new Date(e.data)>=new Date()
+    )
+    .sort((a,b)=>
+      new Date(a.data)-new Date(b.data)
+    );
+
+
+  document.getElementById(
+    "proximoCompromisso"
+  ).innerHTML =
+    compromissos.length
+    ?
+    `
+      <strong>
+        ${escapar(compromissos[0].titulo)}
+      </strong>
+
+      <small>
+        ${formatarData(compromissos[0].data)}
+      </small>
+
+      <small>
+        ${escapar(compromissos[0].local || "")}
+      </small>
+    `
+    :
+    '<div class="vazio">Nenhum compromisso cadastrado.</div>';
+
+
+  let ultimo =
+    dados.avisos.length
+    ?
+    dados.avisos[dados.avisos.length-1]
+    :null;
+
+
+  document.getElementById(
+    "ultimoAviso"
+  ).innerHTML =
+    ultimo
+    ?
+    `
+      <strong>
+        ${escapar(ultimo.titulo)}
+      </strong>
+
+      <p>
+        ${escapar(ultimo.texto || "")}
+      </p>
+    `
+    :
+    '<div class="vazio">Nenhum aviso.</div>';
+}
+
+
+/* =========================
+   PAINEL ADMIN
+========================= */
+
+function atualizarAdmin(){
+
+  atualizarAdmins();
+  atualizarMembros();
+  atualizarOracoes();
+  atualizarOfertas();
+  atualizarGerenciamento();
+}
+
+
+function atualizarAdmins(){
+
+  document.getElementById(
+    "listaAdmins"
+  ).innerHTML =
+
+    dados.admins.map((a,i)=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(a.email)}
+        </strong>
+
+        <br>
+
+        <button
+          class="botao vermelho"
+          onclick="excluirAdmin(${i})"
+        >
+          Excluir
+        </button>
+
+      </div>
+
+    `).join("");
+}
+
+
+function atualizarMembros(){
+
+  let solicitacoes =
+    dados.membros
+    .filter(m=>m.status==="pendente");
+
+
+  document.getElementById(
+    "listaSolicitacoes"
+  ).innerHTML =
+
+    solicitacoes.length
+
+    ?
+
+    solicitacoes.map(m=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(m.nome)}
+        </strong>
+
+        <small>
+          ${escapar(m.email)}
+        </small>
+
+        <small>
+          ${escapar(m.telefone || "")}
+        </small>
+
+        <span class="status pendente">
+          Pendente
+        </span>
+
+        <br>
+
+        <button
+          class="botao verde"
+          onclick="aprovarMembro(${m.id})"
+        >
+          Aprovar
+        </button>
+
+        <button
+          class="botao vermelho"
+          onclick="recusarMembro(${m.id})"
+        >
+          Recusar
+        </button>
+
+      </div>
+
+    `).join("")
+
+    :
+
+    '<div class="vazio">Nenhuma solicitação pendente.</div>';
+
+
+  let aprovados =
+    dados.membros
+    .filter(m=>m.status==="aprovado");
+
+
+  document.getElementById(
+    "listaMembros"
+  ).innerHTML =
+
+    aprovados.length
+
+    ?
+
+    aprovados.map(m=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(m.nome)}
+        </strong>
+
+        <small>
+          ${escapar(m.email)}
+        </small>
+
+        <small>
+          ${escapar(m.telefone || "")}
+        </small>
+
+        <span class="status aprovado">
+          Aprovado
+        </span>
+
+        <br>
+
+        <button
+          class="botao vermelho"
+          onclick="excluirMembro(${m.id})"
+        >
+          Excluir
+        </button>
+
+      </div>
+
+    `).join("")
+
+    :
+
+    '<div class="vazio">Nenhum membro aprovado.</div>';
+}
+
+
+function atualizarOracoes(){
+
+  let el =
+    document.getElementById(
+      "listaOracoes"
+    );
+
+
+  if(!dados.oracoes.length){
+
+    el.innerHTML=
+      '<div class="vazio">Nenhum pedido de oração.</div>';
+
+    return;
+  }
+
+
+  el.innerHTML =
+    dados.oracoes
+    .slice()
+    .reverse()
+    .map(o=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(o.nome)}
+        </strong>
+
+        <p>
+          ${escapar(o.texto)}
+        </p>
+
+        <small>
+          ${formatarData(o.data)}
+        </small>
+
+        <button
+          class="botao vermelho"
+          onclick="excluirOracao(${o.id})"
+        >
+          Excluir
+        </button>
+
+      </div>
+
+    `).join("");
+}
+
+
+function excluirOracao(id){
+
+  if(!confirm("Excluir este pedido de oração?"))
+    return;
+
+  dados.oracoes =
+    dados.oracoes.filter(
+      o=>o.id!=id
+    );
+
+  salvar();
+}
+
+
+function atualizarOfertas(){
+
+  let el =
+    document.getElementById(
+      "listaOfertas"
+    );
+
+
+  if(!dados.ofertas.length){
+
+    el.innerHTML=
+      '<div class="vazio">Nenhum registro.</div>';
+
+    return;
+  }
+
+
+  el.innerHTML =
+    dados.ofertas
+    .slice()
+    .reverse()
+    .map(o=>`
+
+      <div class="item">
+
+        <strong>
+          ${escapar(o.tipo)}
+        </strong>
+
+        <p>
+          R$ ${Number(o.valor)
+            .toFixed(2)
+            .replace(".",",")}
+        </p>
+
+        <small>
+          ${formatarData(o.data)}
+        </small>
+
+      </div>
+
+    `).join("");
+}
+
+
+/* =========================
+   GERENCIAMENTO
+========================= */
+
+function atualizarGerenciamento(){
+
+  let html="";
+
+
+  html+=`<h3>Compromissos</h3>`;
+
+
+  if(!dados.eventos.length){
+
+    html+=
+      '<div class="vazio">Nenhum compromisso.</div>';
+
+  }else{
+
+    html+=
+      dados.eventos.map(e=>`
+
+        <div class="item">
+
+          <strong>
+            ${escapar(e.titulo)}
+          </strong>
+
+          <small>
+            ${escapar(e.tipo)}
+          </small>
+
+          <small>
+            ${formatarData(e.data)}
+          </small>
+
+          <button
+            class="botao"
+            onclick="editarEvento(${e.id})"
+          >
+            Editar
+          </button>
+
+          <button
+            class="botao azul"
+            onclick="copiarEvento(${e.id})"
+          >
+            Copiar
+          </button>
+
+          <button
+            class="botao vermelho"
+            onclick="excluirEvento(${e.id})"
+          >
+            Excluir
+          </button>
+
+          ${resumoReacoes("evento",e.id)}
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  html+=`
+    <div class="separador"></div>
+    <h3>Avisos</h3>
+  `;
+
+
+  if(!dados.avisos.length){
+
+    html+=
+      '<div class="vazio">Nenhum aviso.</div>';
+
+  }else{
+
+    html+=
+      dados.avisos.map(a=>`
+
+        <div class="item">
+
+          <strong>
+            ${escapar(a.titulo)}
+          </strong>
+
+          <button
+            class="botao"
+            onclick="editarAviso(${a.id})"
+          >
+            Editar
+          </button>
+
+          <button
+            class="botao azul"
+            onclick="copiarAviso(${a.id})"
+          >
+            Copiar
+          </button>
+
+          <button
+            class="botao vermelho"
+            onclick="excluirAviso(${a.id})"
+          >
+            Excluir
+          </button>
+
+          ${resumoReacoes("aviso",a.id)}
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  html+=`
+    <div class="separador"></div>
+    <h3>Aniversariantes</h3>
+  `;
+
+
+  if(!dados.aniversarios.length){
+
+    html+=
+      '<div class="vazio">Nenhum aniversariante.</div>';
+
+  }else{
+
+    html+=
+      dados.aniversarios.map(a=>`
+
+        <div class="item">
+
+          <strong>
+            ${escapar(a.nome)}
+          </strong>
+
+          <small>
+            ${formatarDataSimples(a.data)}
+          </small>
+
+          <button
+            class="botao"
+            onclick="editarAniversario(${a.id})"
+          >
+            Editar
+          </button>
+
+          <button
+            class="botao azul"
+            onclick="copiarAniversario(${a.id})"
+          >
+            Copiar
+          </button>
+
+          <button
+            class="botao vermelho"
+            onclick="excluirAniversario(${a.id})"
+          >
+            Excluir
+          </button>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  document.getElementById(
+    "gerenciarConteudo"
+  ).innerHTML=html;
+}
+
+
+function resumoReacoes(tipo,id){
+
+  let chave =
+    tipo+"_"+id;
+
+  let r =
+    dados.reacoes[chave] || {};
+
+  let emojis=[
+    "🙏",
+    "❤️",
+    "👍",
+    "👏",
+    "😊"
+  ];
+
+
+  return `
+    <small>
+      Reações:
+      ${
+        emojis.map(e=>
+          e+" "+((r[e]||[]).length)
+        ).join(" · ")
+      }
+    </small>
+  `;
+}
+
+
+/* =========================
+   SEGURANÇA BÁSICA DE EXIBIÇÃO
+========================= */
+
+function escapar(valor){
+
+  return String(valor ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================
+   ATUALIZAÇÃO GERAL
+========================= */
+
+function atualizarTudo(){
+
+  atualizarInicio();
+
+  atualizarAgenda();
+
+  atualizarAvisos();
+
+  atualizarAniversarios();
+
+  atualizarConteudoMembro();
+
+
+  if(
+    sessionStorage.getItem(
+      "EKKLESIA_ADMIN"
+    )
+  ){
+
+    document.getElementById("loginAdmin")
+      .classList.add("oculto");
+
+    document.getElementById("painelAdmin")
+      .classList.remove("oculto");
+
+    atualizarAdmin();
+
+  }
+
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+atualizarTudo();
+
+</script>
+
+</body>
+</html>
