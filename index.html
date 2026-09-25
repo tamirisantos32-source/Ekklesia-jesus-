@@ -2791,23 +2791,13 @@ function atualizarTudo(){
 
 atualizarTudo();
 
-</script>  
-  
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
-  
+</script> 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue, set, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-<!-- SDKs do Firebase via CDN -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
-<script>
-  // Configuração do seu projeto no Firebase
   const firebaseConfig = {
-    apiKey: "AIzaSyAyeZ-gnST_lo6KQGLSSfpmouI6SysozVA",
+    apiKey: "AIzaSyAYez-gnST_lo6KQGlSSFpmoui6SysozVA",
     authDomain: "ekklesia-4d4c2.firebaseapp.com",
     databaseURL: "https://ekklesia-4d4c2-default-rtdb.firebaseio.com",
     projectId: "ekklesia-4d4c2",
@@ -2817,12 +2807,21 @@ atualizarTudo();
     measurementId: "G-9LNCYXTQQZ"
   };
 
-  // Inicializa o Firebase
-  firebase.initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-  // Conecta ao banco de dados
-  const database = firebase.database();
+  window.db = db;
+  window.dbRef = ref;
+  window.dbPush = push;
+  window.dbSet = set;
+  window.dbOnValue = onValue;
+  window.dbRemove = remove;
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
 </script>
-
 </body>
 </html>
+
+  
