@@ -5,199 +5,551 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ekklesia</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #071A33;
+            color: #ffffff;
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 28px 20px 22px;
+            background: #071A33;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        header h1 {
+            font-size: 27px;
+            letter-spacing: 4px;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #c9d1dc;
+        }
+
+
+        /* PAGES */
+
+        .page {
+            display: none;
+            padding: 22px 18px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: 25px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+
+        /* CARDS */
+
+        .card {
+            background: #0D294B;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+            color: #D4AF37;
+        }
+
+        .card p {
+            color: #c9d1dc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* FEATURE CARD */
+
+        .featured-card {
+            background: linear-gradient(
+                145deg,
+                #0D294B,
+                #102F54
+            );
+
+            border: 1px solid rgba(212, 175, 55, 0.35);
+        }
+
+        .featured-card h3 {
+            font-size: 20px;
+        }
+
+
+        /* BUTTONS */
+
+        .action-button {
+            width: 100%;
+            border: none;
+            border-radius: 13px;
+            padding: 14px;
+            margin-top: 10px;
+            background: #D4AF37;
+            color: #071A33;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .action-button:active {
+            transform: scale(0.97);
+        }
+
+
+        /* ADMIN BUTTON */
+
+        .admin-button {
+            width: 100%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 13px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #0D294B;
+            color: #ffffff;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .admin-button:active {
+            transform: scale(0.98);
+            background: #12365e;
+        }
+
+
+        /* BOTTOM NAVIGATION */
+
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 75px;
+            background: #061426;
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        nav button {
+            border: none;
+            background: transparent;
+            color: #7f8b9a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 11px;
+            min-width: 58px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        nav button .nav-icon {
+            font-size: 22px;
+        }
+
+        nav button.active {
+            color: #D4AF37;
+        }
+
+
+        /* EMPTY MESSAGE */
+
+        .empty {
+            text-align: center;
+            padding: 28px 15px;
+            color: #8996a6;
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (min-width: 700px) {
+
+            body {
+                max-width: 600px;
+                margin: auto;
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+            }
+
+            nav {
+                max-width: 600px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+    </style>
 </head>
 
 <body>
 
+
     <!-- HEADER -->
+
     <header>
         <h1>EKKLESIA</h1>
         <p>The community gathered</p>
     </header>
 
 
+
     <!-- =========================
-         PAGE 1 — HOME
+         HOME
     ========================== -->
-    <main id="home" class="page">
 
-        <h2>Home</h2>
+    <main id="home" class="page active">
 
-        <section>
+        <h2 class="page-title">Home</h2>
+
+        <div class="card featured-card">
+
+            <div class="card-icon">⛪</div>
+
             <h3>Next Service</h3>
-            <p>No service scheduled.</p>
-        </section>
 
-        <section>
+            <p>
+                No service scheduled yet.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📅</div>
+
             <h3>Next Event</h3>
-            <p>No event scheduled.</p>
-        </section>
 
-        <section>
+            <p>
+                No event scheduled yet.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📢</div>
+
             <h3>Recent Announcements</h3>
-            <p>No announcements published.</p>
-        </section>
+
+            <p>
+                No announcements published yet.
+            </p>
+
+        </div>
 
     </main>
 
 
+
     <!-- =========================
-         PAGE 2 — SCHEDULE
+         SCHEDULE
     ========================== -->
-    <main id="schedule" class="page" style="display:none;">
 
-        <h2>Schedule</h2>
+    <main id="schedule" class="page">
 
-        <section>
+        <h2 class="page-title">Schedule</h2>
+
+
+        <div class="card">
+
+            <div class="card-icon">⛪</div>
+
             <h3>Services</h3>
-            <p>Services will appear here.</p>
-        </section>
 
-        <section>
+            <p>
+                Church services will appear here.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎵</div>
+
             <h3>Rehearsals</h3>
-            <p>Rehearsals will appear here.</p>
-        </section>
 
-        <section>
+            <p>
+                Rehearsals will appear here.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">👥</div>
+
             <h3>Meetings</h3>
-            <p>Meetings will appear here.</p>
-        </section>
 
-        <section>
+            <p>
+                Meetings will appear here.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎉</div>
+
             <h3>Events</h3>
-            <p>Events will appear here.</p>
-        </section>
+
+            <p>
+                Church events will appear here.
+            </p>
+
+        </div>
 
     </main>
 
 
+
     <!-- =========================
-         PAGE 3 — ANNOUNCEMENTS
+         ANNOUNCEMENTS
     ========================== -->
-    <main id="announcements" class="page" style="display:none;">
 
-        <h2>Announcements</h2>
+    <main id="announcements" class="page">
 
-        <section>
-            <p>No announcements published.</p>
-        </section>
+        <h2 class="page-title">Announcements</h2>
+
+        <div class="card">
+
+            <div class="card-icon">📢</div>
+
+            <h3>Church Announcements</h3>
+
+            <p>
+                No announcements published yet.
+            </p>
+
+        </div>
 
     </main>
 
 
+
     <!-- =========================
-         PAGE 4 — COMMUNITY
+         COMMUNITY
     ========================== -->
-    <main id="community" class="page" style="display:none;">
 
-        <h2>Community</h2>
+    <main id="community" class="page">
 
-        <section>
+        <h2 class="page-title">Community</h2>
+
+
+        <div class="card">
+
+            <div class="card-icon">🎂</div>
+
             <h3>Birthdays</h3>
-            <p>Birthdays will appear here.</p>
-        </section>
 
-        <section>
+            <p>
+                Birthdays will appear here.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🙏</div>
+
             <h3>Prayer Requests</h3>
-            <p>Prayer requests will appear here.</p>
-        </section>
+
+            <p>
+                Prayer requests will appear here.
+            </p>
+
+        </div>
 
     </main>
 
 
+
     <!-- =========================
-         PAGE 5 — ADMIN
+         ADMIN
     ========================== -->
-    <main id="admin" class="page" style="display:none;">
 
-        <h2>Administration</h2>
+    <main id="admin" class="page">
 
-        <section>
+        <h2 class="page-title">Administration</h2>
+
+
+        <div class="card">
+
+            <div class="card-icon">⚙️</div>
+
             <h3>Manage Ekklesia</h3>
 
-            <button type="button">
-                Create Announcement
-            </button>
+            <p>
+                Manage church information and content.
+            </p>
 
-            <button type="button">
-                Add Service
-            </button>
+        </div>
 
-            <button type="button">
-                Add Event
-            </button>
 
-            <button type="button">
-                Add Birthday
-            </button>
+        <button class="admin-button">
+            📢 &nbsp; Create Announcement
+        </button>
 
-            <button type="button">
-                Manage Members
-            </button>
+        <button class="admin-button">
+            ⛪ &nbsp; Add Service
+        </button>
 
-            <button type="button">
-                Manage Content
-            </button>
+        <button class="admin-button">
+            📅 &nbsp; Add Event
+        </button>
 
-        </section>
+        <button class="admin-button">
+            🎂 &nbsp; Add Birthday
+        </button>
+
+        <button class="admin-button">
+            👥 &nbsp; Manage Members
+        </button>
+
+        <button class="admin-button">
+            🗂️ &nbsp; Manage Content
+        </button>
 
     </main>
+
 
 
     <!-- =========================
          BOTTOM NAVIGATION
     ========================== -->
+
     <nav>
 
-        <button type="button" onclick="showPage('home')">
-            🏠
+        <button class="active" onclick="showPage('home', this)">
+            <span class="nav-icon">🏠</span>
             <span>Home</span>
         </button>
 
-        <button type="button" onclick="showPage('schedule')">
-            📅
+        <button onclick="showPage('schedule', this)">
+            <span class="nav-icon">📅</span>
             <span>Schedule</span>
         </button>
 
-        <button type="button" onclick="showPage('announcements')">
-            📢
+        <button onclick="showPage('announcements', this)">
+            <span class="nav-icon">📢</span>
             <span>Announcements</span>
         </button>
 
-        <button type="button" onclick="showPage('community')">
-            👥
+        <button onclick="showPage('community', this)">
+            <span class="nav-icon">👥</span>
             <span>Community</span>
         </button>
 
-        <button type="button" onclick="showPage('admin')">
-            ⚙️
+        <button onclick="showPage('admin', this)">
+            <span class="nav-icon">⚙️</span>
             <span>Admin</span>
         </button>
 
     </nav>
 
 
+
     <!-- =========================
          JAVASCRIPT
     ========================== -->
+
     <script>
 
-        function showPage(selectedPage) {
+        function showPage(pageId, button) {
 
             const pages = document.querySelectorAll('.page');
 
             pages.forEach(function(page) {
-                page.style.display = 'none';
+                page.classList.remove('active');
             });
 
-            const page = document.getElementById(selectedPage);
 
-            if (page) {
-                page.style.display = 'block';
+            const selectedPage = document.getElementById(pageId);
+
+            if (selectedPage) {
+                selectedPage.classList.add('active');
             }
+
+
+            const buttons = document.querySelectorAll('nav button');
+
+            buttons.forEach(function(navButton) {
+                navButton.classList.remove('active');
+            });
+
+
+            if (button) {
+                button.classList.add('active');
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
     </script>
+
 
 </body>
 </html>
