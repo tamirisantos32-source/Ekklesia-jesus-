@@ -1,26 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <base href="$FLUTTER_BASE_HREF">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Portal Ekklesia - Gestão e Acompanhamento">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Ekklesia">
-  <link rel="apple-touch-icon" href="icone-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="icone-192.png"/>
-
-  <title>Church Portal</title>
-  <link rel="manifest" href="manifest.json">
+    <title>Ekklesia</title>
 </head>
+
 <body>
-  <!-- Inicializador do Flutter Web -->
-  <script src="flutter_bootstrap.js" async></script>
+
+    <!-- HEADER -->
+    <header>
+        <h1>EKKLESIA</h1>
+        <p>The community gathered</p>
+    </header>
+
+
+    <!-- =========================
+         PAGE 1 — HOME
+    ========================== -->
+    <main id="home" class="page">
+
+        <h2>Home</h2>
+
+        <section>
+            <h3>Next Service</h3>
+            <p>No service scheduled.</p>
+        </section>
+
+        <section>
+            <h3>Next Event</h3>
+            <p>No event scheduled.</p>
+        </section>
+
+        <section>
+            <h3>Recent Announcements</h3>
+            <p>No announcements published.</p>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PAGE 2 — SCHEDULE
+    ========================== -->
+    <main id="schedule" class="page" style="display:none;">
+
+        <h2>Schedule</h2>
+
+        <section>
+            <h3>Services</h3>
+            <p>Services will appear here.</p>
+        </section>
+
+        <section>
+            <h3>Rehearsals</h3>
+            <p>Rehearsals will appear here.</p>
+        </section>
+
+        <section>
+            <h3>Meetings</h3>
+            <p>Meetings will appear here.</p>
+        </section>
+
+        <section>
+            <h3>Events</h3>
+            <p>Events will appear here.</p>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PAGE 3 — ANNOUNCEMENTS
+    ========================== -->
+    <main id="announcements" class="page" style="display:none;">
+
+        <h2>Announcements</h2>
+
+        <section>
+            <p>No announcements published.</p>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PAGE 4 — COMMUNITY
+    ========================== -->
+    <main id="community" class="page" style="display:none;">
+
+        <h2>Community</h2>
+
+        <section>
+            <h3>Birthdays</h3>
+            <p>Birthdays will appear here.</p>
+        </section>
+
+        <section>
+            <h3>Prayer Requests</h3>
+            <p>Prayer requests will appear here.</p>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PAGE 5 — ADMIN
+    ========================== -->
+    <main id="admin" class="page" style="display:none;">
+
+        <h2>Administration</h2>
+
+        <section>
+            <h3>Manage Ekklesia</h3>
+
+            <button type="button">
+                Create Announcement
+            </button>
+
+            <button type="button">
+                Add Service
+            </button>
+
+            <button type="button">
+                Add Event
+            </button>
+
+            <button type="button">
+                Add Birthday
+            </button>
+
+            <button type="button">
+                Manage Members
+            </button>
+
+            <button type="button">
+                Manage Content
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         BOTTOM NAVIGATION
+    ========================== -->
+    <nav>
+
+        <button type="button" onclick="showPage('home')">
+            🏠
+            <span>Home</span>
+        </button>
+
+        <button type="button" onclick="showPage('schedule')">
+            📅
+            <span>Schedule</span>
+        </button>
+
+        <button type="button" onclick="showPage('announcements')">
+            📢
+            <span>Announcements</span>
+        </button>
+
+        <button type="button" onclick="showPage('community')">
+            👥
+            <span>Community</span>
+        </button>
+
+        <button type="button" onclick="showPage('admin')">
+            ⚙️
+            <span>Admin</span>
+        </button>
+
+    </nav>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script>
+
+        function showPage(selectedPage) {
+
+            const pages = document.querySelectorAll('.page');
+
+            pages.forEach(function(page) {
+                page.style.display = 'none';
+            });
+
+            const page = document.getElementById(selectedPage);
+
+            if (page) {
+                page.style.display = 'block';
+            }
+        }
+
+    </script>
+
 </body>
 </html>
